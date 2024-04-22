@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9c1719b004.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Registration</title>
+    <style>
+        *{
+            font-size: large;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url("images/house-1.png");
+            background-position: center;
+            background-size: cover;
+            min-height: 100vh;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: rgba(222, 184, 135, 0.6); /* Transparent background */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid #924519ba;
+        }
+
+        h1 {
+            text-align: center;
+            color:rgb(107, 46, 22);
+            margin-bottom: 20px;
+            font-weight: bold; 
+            font-size: x-large;/* Bold text */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color:rgb(107, 46, 22);
+            font-weight: bold; /* Bold text */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-weight: bold; /* Bold text */
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+        }
+
+        input[type="date"]::-webkit-inner-spin-button,
+        input[type="date"]::-webkit-clear-button {
+            display: none;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color:chocolate;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold; /* Bold text */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #118fce;
+        }
+        .navbar-white {
+    /* background-color: #333; */
+    overflow: hidden;
+    position: fixed; /* Make the navbar fixed at the top */
+    top: 0;
+    width: 100%;
+    /* Existing styles */
+
+/* Media query for screens smaller than 768px */
+@media only screen and (max-width: 768px) {
+    .container {
+        max-width: 90%; /* Adjust container width for smaller screens */
+        margin: 20px auto; /* Adjust margin */
+        padding: 20px; /* Adjust padding */
+    }
+
+    h1 {
+        font-size: large; /* Adjust heading size */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    input[type="date"] {
+        font-size: medium; /* Adjust input font size */
+    }
+    
+    input[type="submit"] {
+        font-size: medium; /* Adjust button font size */
+    }
+
+    .nav-links {
+        display: none; /* Hide navigation links */
+    }
+
+    .register-btn {
+        display: block; /* Show register button */
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .navbar-white {
+        position: relative; /* Remove fixed positioning */
+        background-color: transparent; /* Set background color */
+    }
+
+    .navbar-white .nav-links {
+        display: none; /* Hide navigation links */
+    }
+
+    .navbar-white .fa-bars {
+        display: block; /* Show hamburger icon */
+    }
+
+    .logo {
+        width: 50px; /* Adjust logo size */
+        height: auto;
+    }
+}
+
+}
+    </style>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html">
+        <img src="images\logo-red.png" class="logo" alt="">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Popular Places</a></li>
+            <li><a href="houseB.html">Travel Outside</a></li>
+            <li><a href="houseC.html">About Hotel</a></li>
+        </ul>
+        <a href="./table.html" class="register-btn">View Records</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav><br><br>
+    <div class="container">
+        <h1>Hotel Booking Registration</h1>
+        <form id="bookingForm" action="#" method="post">
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+        
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+        
+            <label for="checkin">Check-in Date:</label>
+            <input type="date" id="checkin" name="checkin" required>
+        
+            <label for="checkout">Check-out Date:</label>
+            <input type="date" id="checkout" name="checkout" required>
+        
+            <label for="roomtype">Room Type:</label>
+            <select id="roomtype" name="roomtype" required>
+                <option value="">Select Room Type</option>
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="suite">Suite</option>
+            </select>
+        
+            <input type="submit" value="Book Now">
+        </form>
+        
+    </div>
+
+    <script>
+     document.getElementById('bookingForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    
+    // Get form data
+    const formData = new URLSearchParams();
+    formData.append('fullname', document.getElementById('fullname').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('phone', document.getElementById('phone').value);
+    formData.append('checkin', document.getElementById('checkin').value);
+    formData.append('checkout', document.getElementById('checkout').value);
+    formData.append('roomtype', document.getElementById('roomtype').value);
+    
+    // Send form data to the server
+    fetch('https://ashrepo.onrender.com/posted', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            // Show toaster alert
+            alert('Booking successful!');
+            
+            // Reset form
+            document.getElementById('bookingForm').reset();
+        } else {
+            alert('Error occurred while booking. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error occurred:', error);
+        alert('Error occurred while booking. Please try again.');
+    });
+});
+
+
+    </script>
+</body>
+</html>

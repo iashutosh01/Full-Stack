@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9c1719b004.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Records</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1{
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navBar" class="navbar-white">
+        <a href="index.html">
+        <img src="images\logo-red.png" class="logo" alt="">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Popular Places</a></li>
+            <li><a href="houseB.html">Travel Outside</a></li>
+            <li><a href="houseC.html">About Hotel</a></li>
+        </ul>
+        <a href="./registration.html" class="register-btn">Register Now</a>
+        <i class="fas fa-bars" onclick="togglebtn()"></i>
+    </nav>
+    <br>
+  
+    <h1>Hotel Booking Records</h1>
+    <br>
+    <table id="bookingTable">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Check-in Date</th>
+                <th>Check-out Date</th>
+                <th>Room Type</th>
+            </tr>
+        </thead>
+        <tbody id="bookingData">
+            <!-- Table data will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <script>
+        fetch('https://ashrepo.onrender.com/bookings')
+            .then(response => response.json())
+            .then(data => {
+                const bookingData = document.getElementById('bookingData');
+                data.forEach(booking => {
+                    // Format check-in and check-out dates to display only the date portion
+                    const checkinDate = new Date(booking.checkin).toLocaleDateString();
+                    const checkoutDate = new Date(booking.checkout).toLocaleDateString();
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.fullname}</td>
+                        <td>${booking.email}</td>
+                        <td>${booking.phone}</td>
+                        <td>${checkinDate}</td>
+                        <td>${checkoutDate}</td>
+                        <td>${booking.roomtype}</td>
+                    `;
+                    bookingData.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
